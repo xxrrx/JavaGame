@@ -175,7 +175,9 @@ public class CollisionChecker {
 		return index;
 	}
 	
-	public boolean hasLineOfSight(int startCol, int startRow, int endCol, int endRow) {
+	// In CollisionChecker.java
+	public boolean hasLineOfSight(int startCol, int startRow, int endCol, int endRow, Entity entity) {
+	    entity.losTiles.clear();
 	    int x0 = startCol;
 	    int y0 = startRow;
 	    int x1 = endCol;
@@ -191,6 +193,7 @@ public class CollisionChecker {
 
 	    while (true) {
 	        if (x0 < 0 || y0 < 0 || x0 >= gp.maxWorldCol || y0 >= gp.maxWorldRow) return false;
+	        entity.losTiles.add(new int[]{x0, y0});
 	        int tileNum = gp.tileM.mapTileNum[x0][y0];
 	        if (gp.tileM.tile[tileNum].collision) return false;
 	        if (x0 == x1 && y0 == y1) break;
@@ -207,4 +210,5 @@ public class CollisionChecker {
 	    }
 	    return true;
 	}
+
 }

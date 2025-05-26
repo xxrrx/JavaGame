@@ -366,15 +366,32 @@ public class player extends Entity {
 		
 		for (int i = 0; i < gp.monster.length; i++) {
 		    if (gp.monster[i] != null && gp.monster[i].showLOS) {
-		        int monsterScreenX = gp.monster[i].losStartX - gp.player.worldX + gp.player.screenX;
-		        int monsterScreenY = gp.monster[i].losStartY - gp.player.worldY + gp.player.screenY;
-		        int playerScreenX = gp.player.screenX + gp.tileSize / 2;
-		        int playerScreenY = gp.player.screenY + gp.tileSize / 2;
-		        g2.setColor(Color.GREEN);
-		        g2.drawLine(monsterScreenX + gp.tileSize / 2, monsterScreenY + gp.tileSize / 2,
-		                    playerScreenX, playerScreenY);
+		        for (int[] tile : gp.monster[i].losTiles) {
+		            int tileScreenX = tile[0] * gp.tileSize - gp.player.worldX + gp.player.screenX;
+		            int tileScreenY = tile[1] * gp.tileSize - gp.player.worldY + gp.player.screenY;
+		            g2.setColor(Color.GREEN);
+		            g2.drawRect(tileScreenX, tileScreenY, gp.tileSize, gp.tileSize);
+		        }
 		    }
 		}
+		
+		// Draw the tile the player is standing on in red
+		int playerTileX = (worldX / gp.tileSize) * gp.tileSize - gp.player.worldX + gp.player.screenX;
+		int playerTileY = (worldY / gp.tileSize) * gp.tileSize - gp.player.worldY + gp.player.screenY;
+		g2.setColor(Color.RED);
+		g2.drawRect(playerTileX, playerTileY, gp.tileSize, gp.tileSize);
+
+		// Draw the tile each monster is standing on in red
+		for (int i = 0; i < gp.monster.length; i++) {
+		    if (gp.monster[i] != null) {
+		        int monsterTileX = (gp.monster[i].worldX / gp.tileSize) * gp.tileSize - gp.player.worldX + gp.player.screenX;
+		        int monsterTileY = (gp.monster[i].worldY / gp.tileSize) * gp.tileSize - gp.player.worldY + gp.player.screenY;
+		        g2.setColor(Color.RED);
+		        g2.drawRect(monsterTileX, monsterTileY, gp.tileSize, gp.tileSize);
+		    }
+		}
+		
+		
 		
 		g2.drawImage(image, screenX-12, screenY-4, 70,70, null);
 		g2.setColor(Color.red);

@@ -83,7 +83,7 @@ public class MON_PurpleSlime extends Entity {
 	    int attackRange = gp.tileSize * 4;
 
 	    if (dx < attackRange && dy < attackRange &&
-	        gp.cChecker.hasLineOfSight(monsterCol, monsterRow, playerCol, playerRow)) {
+	        gp.cChecker.hasLineOfSight(monsterCol, monsterRow, playerCol, playerRow,this)) {
 	        // Đổi hướng về phía người chơi
 	    	
 	    	showLOS = true;

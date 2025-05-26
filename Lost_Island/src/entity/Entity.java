@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Graphics2D;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
+import java.util.List;
+
 import main.GamePanel;
 
 public class Entity {
@@ -11,6 +14,7 @@ public class Entity {
 	
 	public boolean showLOS = false;
 	public int losStartX, losStartY;
+    public List<int[]> losTiles = new ArrayList<>();
 	
 	public BufferedImage image,image2,image3;
 	public BufferedImage up1,up2,up3,up4,up5,up6,

@@ -96,7 +96,7 @@ public class MON_Skeleton extends Entity {
 	        showLOS = false;
 
 	        actionLockCounter++;
-	        if(actionLockCounter==120) {
+	        if(actionLockCounter==70) {
 	            Random random = new Random();
 	            int i = random.nextInt(100)+1;
 	            if(i<=25) direction="up";

@@ -58,6 +58,12 @@ public class Entity {
 	public int useCost;
 	public Projectile projectile;
 	
+	// KnockBack
+	public boolean knockBack = false;
+	public String knockBackDirection = "";
+	public int knockBackCounter = 0;
+	public int knockBackDistance = 16; 
+	
 	public Entity(GamePanel gp) {
 		this.gp=gp;
 	}
@@ -67,11 +73,29 @@ public class Entity {
 	}
 	
 	public void damageReaction() {
-		
+	    knockBack = true;
+	    knockBackDirection =gp.player.direction;
+	    knockBackCounter = 0;
 	}
 	
 	public void update() {
 		setAction();
+		
+	    if (knockBack) {
+	        int knockSpeed = 4; // speed of knockback
+	        switch (knockBackDirection) {
+	            case "up": worldY -= knockSpeed; break;
+	            case "down": worldY += knockSpeed; break;
+	            case "left": worldX -= knockSpeed; break;
+	            case "right": worldX += knockSpeed; break;
+	        }
+	        knockBackCounter += knockSpeed;
+	        if (knockBackCounter >= knockBackDistance) {
+	            knockBack = false;
+	            knockBackCounter = 0;
+	        }
+	        return;
+	    }
 		
 		collisionOn = false;
 		gp.cChecker.checkTile(this);

@@ -49,7 +49,11 @@ public class GamePanel extends JPanel implements Runnable {
 	Sound titleMusic = new Sound();
 	Thread gameThread;
 	
+	public int loadingProgress = 0;
+	public int loadingMax = 100;
+	
 	public int gameState;
+	public final int loadingState = 0;
 	public final int playState = 1;
 	public final int pauseState = 2;
 	public final int titleState = 3;
@@ -64,7 +68,7 @@ public class GamePanel extends JPanel implements Runnable {
 	}
 	
 	public void setupGame() {
-		gameState = titleState;
+		gameState = loadingState;
 		aSetter.setMonster();
 		playTitleMusic(1);
 	}

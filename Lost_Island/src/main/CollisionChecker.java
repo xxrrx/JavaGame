@@ -175,7 +175,6 @@ public class CollisionChecker {
 		return index;
 	}
 	
-	// Thêm vào class CollisionChecker
 	public boolean hasLineOfSight(int startCol, int startRow, int endCol, int endRow) {
 	    int x0 = startCol;
 	    int y0 = startRow;
@@ -191,7 +190,6 @@ public class CollisionChecker {
 	    int err = dx - dy;
 
 	    while (true) {
-	        // Out of bounds check
 	        if (x0 < 0 || y0 < 0 || x0 >= gp.maxWorldCol || y0 >= gp.maxWorldRow) return false;
 	        int tileNum = gp.tileM.mapTileNum[x0][y0];
 	        if (gp.tileM.tile[tileNum].collision) return false;

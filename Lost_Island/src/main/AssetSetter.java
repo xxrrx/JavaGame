@@ -35,6 +35,7 @@ public class AssetSetter {
 		gp.monster[5] = new MON_BlueSlime(gp);
 		gp.monster[5].worldX = gp.tileSize*63;
 		gp.monster[5].worldY = gp.tileSize*15;
+	    gp.loadingProgress = 5;
 		
 		gp.monster[6] = new MON_Skeleton(gp);
 		gp.monster[6].worldX = gp.tileSize*74;
@@ -55,6 +56,7 @@ public class AssetSetter {
 		gp.monster[10] = new MON_BlueSlime(gp);
 		gp.monster[10].worldX = gp.tileSize*38;
 		gp.monster[10].worldY = gp.tileSize*19;
+	    gp.loadingProgress = 10;
 		
 		gp.monster[11] = new MON_Skeleton(gp);
 		gp.monster[11].worldX = gp.tileSize*61;
@@ -87,6 +89,7 @@ public class AssetSetter {
 		gp.monster[18] = new MON_Skeleton(gp);
 		gp.monster[18].worldX = gp.tileSize*27;
 		gp.monster[18].worldY = gp.tileSize*27;
+	    gp.loadingProgress = 15;
 		
 		gp.monster[19] = new MON_PurpleSlime(gp);
 		gp.monster[19].worldX = gp.tileSize*30;
@@ -99,6 +102,7 @@ public class AssetSetter {
 		gp.monster[21] = new MON_Skeleton(gp);
 		gp.monster[21].worldX = gp.tileSize*41;
 		gp.monster[21].worldY = gp.tileSize*37;
+	    gp.loadingProgress = 22;
 		
 		gp.monster[22] = new MON_PurpleSlime(gp);
 		gp.monster[22].worldX = gp.tileSize*59;
@@ -135,6 +139,7 @@ public class AssetSetter {
 		gp.monster[30] = new MON_BlueSlime(gp);
 		gp.monster[30].worldX = gp.tileSize*62;
 		gp.monster[30].worldY = gp.tileSize*54;
+	    gp.loadingProgress = 30;
 		
 		gp.monster[31] = new MON_PurpleSlime(gp);
 		gp.monster[31].worldX = gp.tileSize*65;
@@ -147,6 +152,7 @@ public class AssetSetter {
 		gp.monster[33] = new MON_BlueSlime(gp);
 		gp.monster[33].worldX = gp.tileSize*79;
 		gp.monster[33].worldY = gp.tileSize*55;
+	    gp.loadingProgress = 34;
 		
 		gp.monster[34] = new MON_PurpleSlime(gp);
 		gp.monster[34].worldX = gp.tileSize*34;
@@ -171,6 +177,7 @@ public class AssetSetter {
 		gp.monster[39] = new MON_PurpleSlime(gp);
 		gp.monster[39].worldX = gp.tileSize*49;
 		gp.monster[39].worldY = gp.tileSize*63;
+	    gp.loadingProgress = 40;
 		
 		gp.monster[40] = new MON_BlueSlime(gp);
 		gp.monster[40].worldX = gp.tileSize*72;
@@ -195,6 +202,7 @@ public class AssetSetter {
 		gp.monster[45] = new MON_PurpleSlime(gp);
 		gp.monster[45].worldX = gp.tileSize*23;
 		gp.monster[45].worldY = gp.tileSize*66;
+	    gp.loadingProgress = 50;
 		
 		gp.monster[46] = new MON_PurpleSlime(gp);
 		gp.monster[46].worldX = gp.tileSize*24;
@@ -219,7 +227,8 @@ public class AssetSetter {
 		gp.monster[51] = new MON_BlueSlime(gp);
 		gp.monster[51].worldX = gp.tileSize*31;
 		gp.monster[51].worldY = gp.tileSize*81;
-		
+	    gp.loadingProgress = 67;
+
 		gp.monster[52] = new MON_PurpleSlime(gp);
 		gp.monster[52].worldX = gp.tileSize*40;
 		gp.monster[52].worldY = gp.tileSize*80;
@@ -243,6 +252,7 @@ public class AssetSetter {
 		gp.monster[57] = new MON_BlueSlime(gp);
 		gp.monster[57].worldX = gp.tileSize*58;
 		gp.monster[57].worldY = gp.tileSize*70;
+	    gp.loadingProgress = 90;
 		
 		gp.monster[58] = new MON_Skeleton(gp);
 		gp.monster[58].worldX = gp.tileSize*74;
@@ -255,5 +265,7 @@ public class AssetSetter {
 		gp.monster[60] = new MON_PurpleSlime(gp);
 		gp.monster[60].worldX = gp.tileSize*50;
 		gp.monster[60].worldY = gp.tileSize*54;
+	    gp.loadingProgress = 100;
+	    gp.repaint(); 
 	}
 }

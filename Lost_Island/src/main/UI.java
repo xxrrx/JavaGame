@@ -46,23 +46,26 @@ public class UI {
 	}
 	
 	public void draw(Graphics2D g2) {
-		this.g2=g2;
-		g2.setFont(arial_40);
-		
-		if(gp.gameState==gp.playState) {
-			drawPlayerLife();
-		}
-		
-		if(gp.gameState == gp.titleState) {
-			drawTitleScreen();
-		}
-		
-		if(gp.gameState==gp.pauseState) {
-			drawPauseScreen();
-		}
-		if(gp.gameState==gp.gameOverState) {
-			drawGameOverScreen();
-		}
+	    this.g2 = g2;
+	    g2.setFont(arial_40);
+
+	    if (gp.gameState == gp.loadingState) {
+	        drawLoadingScreen(g2);
+	        return;
+	    }
+	    if (gp.gameState == gp.playState) {
+	        drawPlayerLife();
+	        drawMinimap(g2);
+	    }
+	    if (gp.gameState == gp.titleState) {
+	        drawTitleScreen();
+	    }
+	    if (gp.gameState == gp.pauseState) {
+	        drawPauseScreen();
+	    }
+	    if (gp.gameState == gp.gameOverState) {
+	        drawGameOverScreen();
+	    }
 	}
 	
 	public void drawPlayerLife() {
@@ -210,6 +213,81 @@ public class UI {
 		
 	}
 	
+	public void drawMinimap(Graphics2D g2) {
+	    int minimapSize = 150;
+	    int minimapX = gp.screenWitdth - minimapSize - 20;
+	    int minimapY = gp.screenHeight - minimapSize - 20;
+
+	    // Draw minimap background
+	    g2.setColor(new Color(0, 0, 0, 180));
+	    g2.fillRect(minimapX, minimapY, minimapSize, minimapSize);
+
+	    g2.setColor(Color.YELLOW);
+	    g2.setStroke(new java.awt.BasicStroke(4));
+	    g2.drawRect(minimapX, minimapY, minimapSize, minimapSize);
+	    
+	    double scaleX = (double)minimapSize / gp.maxWorldCol;
+	    double scaleY = (double)minimapSize / gp.maxWorldRow;
+
+	    for (int col = 0; col < gp.maxWorldCol; col++) {
+	        for (int row = 0; row < gp.maxWorldRow; row++) {
+	            int tileNum = gp.tileM.mapTileNum[col][row];
+	            if(tileNum == 0) {
+	                g2.setColor(Color.decode("#7C573C"));
+	            } else if(tileNum == 1) {
+	                g2.setColor(Color.decode("#67A45E"));
+	            } else if(tileNum == 2) {
+	                g2.setColor(Color.decode("#CA9E51"));
+	            } else if(tileNum == 3) {
+	                g2.setColor(Color.decode("#1A2D17"));
+	            }else if(tileNum == 4) {
+	                g2.setColor(Color.decode("#303030"));
+	            }else {
+	                g2.setColor(Color.decode("#3A8FCA"));
+	            }
+	            int x = minimapX + (int)(col * scaleX);
+	            int y = minimapY + (int)(row * scaleY);
+	            g2.fillRect(x, y, (int)Math.ceil(scaleX), (int)Math.ceil(scaleY));
+	        }
+	    }
+
+	    // Draw player
+	    int playerMinimapX = minimapX + (int)((gp.player.worldX / gp.tileSize) * scaleX);
+	    int playerMinimapY = minimapY + (int)((gp.player.worldY / gp.tileSize) * scaleY);
+	    g2.setColor(Color.RED);
+	    g2.fillOval(playerMinimapX - 3, playerMinimapY - 3, 6, 6);
+	}
+
+	public void drawLoadingScreen(Graphics2D g2) {
+	    g2.setColor(Color.BLACK);
+	    g2.fillRect(0, 0, gp.screenWitdth, gp.screenHeight);
+	    g2.setFont(g2.getFont().deriveFont(Font.BOLD, 60F));
+	    g2.setColor(Color.YELLOW);
+	    String text = "LOADING...";
+	    int x = getXForCenteredText(text);
+	    int y = gp.screenHeight / 2;
+	    g2.drawString(text, x, y);
+
+	    // Optional: Draw a loading bar
+	    int barWidth = 400;
+	    int barHeight = 30;
+	    int barX = gp.screenWitdth / 2 - barWidth / 2;
+	    int barY = gp.screenHeight / 2 + 40;
+	    g2.setColor(Color.GRAY);
+	    g2.fillRect(barX, barY, barWidth, barHeight);
+
+	    double percent = (gp.loadingProgress * 1.0) / gp.loadingMax;
+	    if(gp.loadingMax==gp.loadingProgress) {
+	        gp.gameState = gp.titleState;
+	    }
+	    g2.setColor(Color.GREEN);
+	    g2.fillRect(barX, barY, (int)(barWidth * percent), barHeight);
+
+	    g2.setColor(Color.WHITE);
+	    g2.drawRect(barX, barY, barWidth, barHeight);
+	}
+
+
 	public void showMessage(String text) {
 		message = text;
 		messageOn=true;

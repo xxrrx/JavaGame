@@ -109,11 +109,11 @@ public class TileManager {
 				g2.drawImage(tile[mapTileNum[worldCol][worldRow]].image, screenX, screenY, gp.tileSize, gp.tileSize,
 						null);
 
-//				g2.setColor(Color.BLUE);
-//				g2.drawRect(worldX - gp.player.worldX + gp.player.screenX,
-//				            worldY - gp.player.worldY + gp.player.screenY,
-//				            gp.tileSize, gp.tileSize);
-//				
+				g2.setColor(Color.BLUE);
+				g2.drawRect(worldX - gp.player.worldX + gp.player.screenX,
+				            worldY - gp.player.worldY + gp.player.screenY,
+				            gp.tileSize, gp.tileSize);
+				
 			}
 			worldCol++;
 			if (worldCol == gp.maxWorldCol) {

@@ -68,14 +68,19 @@ public class MON_BlueSlime extends Entity {
 	
 	@Override
 	public void setAction() {
-	    int monsterCol = worldX / gp.tileSize;
-	    int monsterRow = worldY / gp.tileSize;
-	    int playerCol = gp.player.worldX / gp.tileSize;
-	    int playerRow = gp.player.worldY / gp.tileSize;
+		int monsterCenterX = worldX + solidArea.x + solidArea.width / 2;
+		int monsterCenterY = worldY + solidArea.y + solidArea.height / 2;
+		int playerCenterX = gp.player.worldX + gp.player.solidArea.x + gp.player.solidArea.width / 2;
+		int playerCenterY = gp.player.worldY + gp.player.solidArea.y + gp.player.solidArea.height / 2;
 
-	    int dx = Math.abs(gp.player.worldX - worldX);
-	    int dy = Math.abs(gp.player.worldY - worldY);
-	    int attackRange = gp.tileSize * 4;
+		int monsterCol = monsterCenterX / gp.tileSize;
+		int monsterRow = monsterCenterY / gp.tileSize;
+		int playerCol = playerCenterX / gp.tileSize;
+		int playerRow = playerCenterY / gp.tileSize;
+
+		int dx = Math.abs(playerCenterX - monsterCenterX);
+		int dy = Math.abs(playerCenterY - monsterCenterY);
+		int attackRange = gp.tileSize * 4;
 
 	    if (dx < attackRange && dy < attackRange &&
 	        gp.cChecker.hasLineOfSight(monsterCol, monsterRow, playerCol, playerRow,this)) {

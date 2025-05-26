@@ -175,7 +175,6 @@ public class CollisionChecker {
 		return index;
 	}
 	
-	// In CollisionChecker.java
 	public boolean hasLineOfSight(int startCol, int startRow, int endCol, int endRow, Entity entity) {
 	    entity.losTiles.clear();
 	    int x0 = startCol;
@@ -183,32 +182,59 @@ public class CollisionChecker {
 	    int x1 = endCol;
 	    int y1 = endRow;
 
-	    int dx = Math.abs(x1 - x0);
-	    int dy = Math.abs(y1 - y0);
+	    int dx = x1 - x0;
+	    int dy = y1 - y0;
 
-	    int sx = x0 < x1 ? 1 : -1;
-	    int sy = y0 < y1 ? 1 : -1;
-
-	    int err = dx - dy;
-
-	    while (true) {
-	        if (x0 < 0 || y0 < 0 || x0 >= gp.maxWorldCol || y0 >= gp.maxWorldRow) return false;
+	    // Avoid division by zero
+	    if (dx == 0 && dy == 0) {
 	        entity.losTiles.add(new int[]{x0, y0});
-	        int tileNum = gp.tileM.mapTileNum[x0][y0];
-	        if (gp.tileM.tile[tileNum].collision) return false;
-	        if (x0 == x1 && y0 == y1) break;
+	        return true;
+	    }
 
-	        int e2 = 2 * err;
-	        if (e2 > -dy) {
-	            err -= dy;
-	            x0 += sx;
+	    double k = (dx == 0) ? Double.POSITIVE_INFINITY : (double) dy / dx;
+
+	    // k > 1 or k < -1: y-major
+	    if (k > 1 || k < -1) {
+	        int sx = dx > 0 ? 1 : -1;
+	        int sy = dy > 0 ? 1 : -1;
+	        int absDx = Math.abs(dx);
+	        int absDy = Math.abs(dy);
+	        int err = absDy / 2;
+	        int x = x0;
+	        for (int y = y0; sy > 0 ? y <= y1 : y >= y1; y += sy) {
+	            if (x < 0 || y < 0 || x >= gp.maxWorldCol || y >= gp.maxWorldRow) return false;
+	            entity.losTiles.add(new int[]{x, y});
+	            int tileNum = gp.tileM.mapTileNum[x][y];
+	            if (gp.tileM.tile[tileNum].collision) return false;
+	            err -= absDx;
+	            if (err < 0) {
+	                x += sx;
+	                err += absDy;
+	            }
 	        }
-	        if (e2 < dx) {
-	            err += dx;
-	            y0 += sy;
+	    }
+	    // -1 < k < 1: x-major
+	    else {
+	        int sx = dx > 0 ? 1 : -1;
+	        int sy = dy > 0 ? 1 : -1;
+	        int absDx = Math.abs(dx);
+	        int absDy = Math.abs(dy);
+	        int err = absDx / 2;
+	        int y = y0;
+	        for (int x = x0; sx > 0 ? x <= x1 : x >= x1; x += sx) {
+	            if (x < 0 || y < 0 || x >= gp.maxWorldCol || y >= gp.maxWorldRow) return false;
+	            entity.losTiles.add(new int[]{x, y});
+	            int tileNum = gp.tileM.mapTileNum[x][y];
+	            if (gp.tileM.tile[tileNum].collision) return false;
+	            err -= absDy;
+	            if (err < 0) {
+	                y += sy;
+	                err += absDx;
+	            }
 	        }
 	    }
 	    return true;
 	}
+
 
 }

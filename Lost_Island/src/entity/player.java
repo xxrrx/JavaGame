@@ -363,34 +363,40 @@ public class player extends Entity {
 			}	
 		}
 		
+		//Hiện ô vị trí của Player và quái
 		
-		for (int i = 0; i < gp.monster.length; i++) {
-		    if (gp.monster[i] != null && gp.monster[i].showLOS) {
-		        for (int[] tile : gp.monster[i].losTiles) {
-		            int tileScreenX = tile[0] * gp.tileSize - gp.player.worldX + gp.player.screenX;
-		            int tileScreenY = tile[1] * gp.tileSize - gp.player.worldY + gp.player.screenY;
-		            g2.setColor(Color.GREEN);
-		            g2.drawRect(tileScreenX, tileScreenY, gp.tileSize, gp.tileSize);
-		        }
-		    }
-		}
-		
-		// Draw the tile the player is standing on in red
-		int playerTileX = (worldX / gp.tileSize) * gp.tileSize - gp.player.worldX + gp.player.screenX;
-		int playerTileY = (worldY / gp.tileSize) * gp.tileSize - gp.player.worldY + gp.player.screenY;
-		g2.setColor(Color.RED);
-		g2.drawRect(playerTileX, playerTileY, gp.tileSize, gp.tileSize);
-
-		// Draw the tile each monster is standing on in red
-		for (int i = 0; i < gp.monster.length; i++) {
-		    if (gp.monster[i] != null) {
-		        int monsterTileX = (gp.monster[i].worldX / gp.tileSize) * gp.tileSize - gp.player.worldX + gp.player.screenX;
-		        int monsterTileY = (gp.monster[i].worldY / gp.tileSize) * gp.tileSize - gp.player.worldY + gp.player.screenY;
-		        g2.setColor(Color.RED);
-		        g2.drawRect(monsterTileX, monsterTileY, gp.tileSize, gp.tileSize);
-		    }
-		}
-		
+//		for (int i = 0; i < gp.monster.length; i++) {
+//		    if (gp.monster[i] != null && gp.monster[i].showLOS) {
+//		        for (int[] tile : gp.monster[i].losTiles) {
+//		            int tileScreenX = tile[0] * gp.tileSize - gp.player.worldX + gp.player.screenX;
+//		            int tileScreenY = tile[1] * gp.tileSize - gp.player.worldY + gp.player.screenY;
+//		            g2.setColor(Color.GREEN);
+//		            g2.drawRect(tileScreenX, tileScreenY, gp.tileSize, gp.tileSize);
+//		        }
+//		    }
+//		}
+//		
+//		int playerCenterX = worldX + solidArea.x + solidArea.width / 2;
+//		int playerCenterY = worldY + solidArea.y + solidArea.height / 2;
+//		int playerTileCol = playerCenterX / gp.tileSize;
+//		int playerTileRow = playerCenterY / gp.tileSize;
+//		int playerTileX = playerTileCol * gp.tileSize - gp.player.worldX + gp.player.screenX;
+//		int playerTileY = playerTileRow * gp.tileSize - gp.player.worldY + gp.player.screenY;
+//		g2.setColor(Color.RED);
+//		g2.drawRect(playerTileX, playerTileY, gp.tileSize, gp.tileSize);
+//
+//		for (int i = 0; i < gp.monster.length; i++) {
+//		    if (gp.monster[i] != null) {
+//		        int monsterCenterX = gp.monster[i].worldX + gp.monster[i].solidArea.x + gp.monster[i].solidArea.width / 2;
+//		        int monsterCenterY = gp.monster[i].worldY + gp.monster[i].solidArea.y + gp.monster[i].solidArea.height / 2;
+//		        int monsterTileCol = monsterCenterX / gp.tileSize;
+//		        int monsterTileRow = monsterCenterY / gp.tileSize;
+//		        int monsterTileX = monsterTileCol * gp.tileSize - gp.player.worldX + gp.player.screenX;
+//		        int monsterTileY = monsterTileRow * gp.tileSize - gp.player.worldY + gp.player.screenY;
+//		        g2.setColor(Color.RED);
+//		        g2.drawRect(monsterTileX, monsterTileY, gp.tileSize, gp.tileSize);
+//		    }
+//		}
 		
 		
 		g2.drawImage(image, screenX-12, screenY-4, 70,70, null);
